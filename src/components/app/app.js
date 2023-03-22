@@ -15,10 +15,16 @@ class App extends Component {
             data: [
                 {name: 'John C.', salary: 800, increase: false, rise: true, id: 1},
                 {name: 'Alex M.', salary: 3000, increase: true, rise: false, id: 2},
-                {name: 'Carl W.', salary: 5000, increase: false, rise: false, id: 3}
-            ]
+                {name: 'Carl W.', salary: 5000, increase: false, rise: false, id: 3},
+                {name: 'Alfred X.', salary: 2000, increase: false, rise: false, id: 4},
+                {name: 'Justine U.', salary: 1300, increase: false, rise: false, id: 5},
+                {name: 'Casper I.', salary: 2000, increase: false, rise: false, id: 6}
+            ],
+            term : '',
+            filterBtn: 'all',
         }
-        this.maxId = 4;
+        this.maxId = 7;
+        // this.term = '';
     }
 
     deleteItem = (id) => {
@@ -68,41 +74,63 @@ class App extends Component {
         })
     }
 
-    sortIncrease = () => {
+    sortBtn = (items, filterBtn) => {
+        // items.forEach(items => (items.sort()))
+    //         if (filterBtn === 'all') 
+    //             {return items} 
+            
+    //         else if (filterBtn === 'salary') 
+    //             { return items.filter(item => 
+    //                 {return item.salary > 1000})
+    //         } 
+
+    //         else if(filterBtn === 'increase')
+    //             {return items.filter(item => 
+    //                 {return item.increase})}
+    }
+
+    onSearchEmployers = (items, term) => {
+       if (term.length === 0 || term === false) {
+            return items
+        } else {
+            return items.filter(data => { 
+                return data.name.indexOf(term) > -1 
+            });
+        }                                
+    }
+    
+    termSearch = (e) => {
         this.setState(() => {
-            const filterIncrease = this.state.data.filter(data => data.increase)
-            return {
-                data: filterIncrease
-            }
+            return {term : e.target.value}
         })
     }
 
-    sortSalary = () => {
+    filterBtnSearch = (e) => {
         this.setState(() => {
-            const filterSalary = this.state.data.filter(data => data.salary > 1000)
-            return {
-                data: filterSalary
-            }
+            return {filterBtn :  e.target.name }
         })
     }
-.
+    
     render() {
         const employees = this.state.data.length;
-        const increased = this.state.data.filter(item => item.increase).length;
+        const increased = this.state.data.filter(item => item.rise).length;
+        const visibleData = this.sortBtn(this.onSearchEmployers(this.state.data, this.state.term), this.state.filterBtn);
         return (
             <div className="app">
                 <AppInfo employees={employees} increased={increased}/>
     
                 <div className="search-panel">
-                    <SearchPanel/>
+                    <SearchPanel
+                    termSearch= {this.termSearch}
+                    />
                     <AppFilter 
-                    sortIncrease = {this.sortIncrease}
-                    sortSalary= {this.sortSalary}
+                    filterBtn={this.state.filterBtn}
+                    filterBtnSearch= {this.filterBtnSearch}
                     />
                 </div>
                 
                 <EmployersList 
-                    data={this.state.data}
+                    data={visibleData}
                     onDelete={this.deleteItem}
                     onLike = {this.onLike}
                     onIncrease = {this.onIncrease}

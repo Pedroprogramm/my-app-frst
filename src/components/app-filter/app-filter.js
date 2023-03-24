@@ -15,6 +15,7 @@ const buttons = Btn.map(({name, label}) => {
         <button className={classNames()}
         type='button'
         name={name}
+        key={name}
         onClick={filterBtnSearch}
         >
             {label}
@@ -25,26 +26,6 @@ const buttons = Btn.map(({name, label}) => {
        
         <div className='btn-group'>
         {buttons}
-            {/* <button className="btn btn-light"
-                    type='button'
-                    name='all'
-                    onClick={filterBtnSearch}
-                    >
-                        Все сотрудники
-            </button>
-            <button className="btn btn-outline-light"
-                    type='button'
-                    onClick={filterBtnSearch}
-                    name='increase'>
-                        На повышение
-            </button>
-            <button className="btn btn-outline-light"
-                    type='button'
-                    onClick={filterBtnSearch}
-                    name='salary'>
-                        З/П больше 1000$
-            </button> */}
-
         </div>
     )
 }

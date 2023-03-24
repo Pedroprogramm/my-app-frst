@@ -2,7 +2,7 @@ import EmployeesListItem from "../employers-list-item/employers-list-item";
 import './employers-list.css';
 
 
-const EmployersList = ({data, onLike, onIncrease, onDelete, like}) => {
+const EmployersList = ({data, onLike, onIncrease, onDelete}) => {
 
 
     const element = data.map(item => {
@@ -10,11 +10,11 @@ const EmployersList = ({data, onLike, onIncrease, onDelete, like}) => {
         
         return(
         <EmployeesListItem 
-        key ={id} {...itemProps}
+        key ={id} 
+        {...itemProps}
             onDelete = {() => {onDelete(id)}}
             onLike = {() => {onLike(id)}}
             onIncrease = {() => {onIncrease(id)}}
-            like =  {like}
         />
     )})
 

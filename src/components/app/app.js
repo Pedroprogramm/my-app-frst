@@ -76,18 +76,30 @@ class App extends Component {
 
     sortBtn = (items, filterBtn) => {
         // items.forEach(items => (items.sort()))
-    //         if (filterBtn === 'all') 
-    //             {return items} 
+            // if (filterBtn === 'all') 
+            //     {return items} 
             
-    //         else if (filterBtn === 'salary') 
-    //             { return items.filter(item => 
-    //                 {return item.salary > 1000})
-    //         } 
+            // else if (filterBtn === 'salary') 
+            //     { return items.filter(item => 
+            //         {return item.salary > 1000})
+            // } 
 
-    //         else if(filterBtn === 'increase')
-    //             {return items.filter(item => 
-    //                 {return item.increase})}
+            // else if(filterBtn === 'increase')
+            //     {return items.filter(item => 
+            //         {return item.increase})}
+    switch(filterBtn){
+        case "all": 
+            return items;
+        case "salary": 
+            return items.filter(item => 
+                {return item.salary > 1000}); 
+        case "increase": 
+            return items.filter(item => 
+                {return item.increase})
+        default: 
+            console.log('error') 
     }
+}
 
     onSearchEmployers = (items, term) => {
        if (term.length === 0 || term === false) {
